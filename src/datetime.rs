@@ -253,6 +253,16 @@ impl<Tz: TimeZone> DateTime<Tz> {
     }
 }
 
+#[cfg(feature = "datetime_default")]
+impl Default for DateTime<Utc> {
+    fn default() -> Self {
+        use std::lazy::SyncLazy;
+        static DEFAULT: SyncLazy<DateTime<Utc>> =
+            SyncLazy::new(|| Utc.ymd(1, 1, 1).and_hms(0, 0, 0));
+        *DEFAULT
+    }
+}
+
 /// Convert a `DateTime<Utc>` instance into a `DateTime<FixedOffset>` instance.
 impl From<DateTime<Utc>> for DateTime<FixedOffset> {
     /// Convert this `DateTime<Utc>` instance into a `DateTime<FixedOffset>` instance.

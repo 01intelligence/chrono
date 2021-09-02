@@ -1,3 +1,4 @@
+#![feature(once_cell)]
 // This is a part of Chrono.
 // See README.md and LICENSE.txt for details.
 
